@@ -43,13 +43,13 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: microstack-${{env.BUILDDATE}}-${{ env.SHA_SHORT }}
-        path: $HOME/MouseSuite
+        path: $HOME/MouseSuite26a
         overwrite: true  
         
     - name: Save Package Folder as Zip for Release
       if: github.event_name == 'release'
       run: |
-        zip -r ${{env.ZipFile}} $HOME/MouseSuite
+        zip -r ${{env.ZipFile}} $HOME/MouseSuite26a
 
     - name: Publish ${{ env.Package }}
       if: github.event_name == 'release'
