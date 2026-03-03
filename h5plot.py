@@ -5,9 +5,8 @@ import time
 import numpy as np
 
 # filename='/data2/Rodent/big.h5'
-# filename='/nafs/shattuck/RodentToolsData/Ex_488_Em_525_stitched.h5'
-# filename='/data2/Rodent/Ex_488_Em_525_stitched_32nc.h5'
-filename='/data2/Rodent/Ex_488_Em_525_stitched_32nc.h5'
+filename='/nafs/shattuck/RodentToolsData/Ex_488_Em_525_stitched.h5'
+#filename='/data2/Rodent/Ex_488_Em_525_stitched_32nc.h5'
 
 total_time = time.perf_counter()
 # cache_size_bytes=269*229*32*32*32*2*2
