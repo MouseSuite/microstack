@@ -13,6 +13,7 @@
 #include <sstream>
 #include <stdlib.h>
 #include <vector>
+#include <cinttypes>
 // #ifndef BUILDVERSION
 // #include "buildversiondef.h"
 // #endif
