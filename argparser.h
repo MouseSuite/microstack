@@ -243,7 +243,7 @@ public:
   ArgParserBase(std::string progname) : progname(progname), licenseFlag(false), usageDisplayWidth(30), showHidden(false), errcode(0)
   {
     version="26a";
-    copyright="Copyright (C) 20266 The Regents of the University of California";
+    copyright="Copyright (C) 2026 The Regents of the University of California";
     license="This program is free software and is released under a GNU General Public License; Version 2.\n"
             "For more details, run the program with the argument --license.\n";
     fullLicense=
