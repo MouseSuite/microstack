@@ -1,0 +1,25 @@
+name: Linux Packager
+run-name: Package microstack for Linux by @${{ github.actor }}
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: install hdf5 and libtiff
+      run: |
+        sudo apt install libtiff-dev libhdf5-dev
+        
+    - name: make
+      run: make -j
+
