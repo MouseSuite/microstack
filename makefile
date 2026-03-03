@@ -55,7 +55,7 @@ run: $(Target)
 	$(Target)
 
 test: $(Target)
-	$(Target) -n tiffs -i /data/RodentToolsData/Ex_488_Em_525_stitched/082870_110900_074*.tif -o test_32.h5
+	$(Target) -n stack -i /data/RodentToolsData/Ex_488_Em_525_stitched/082870_110900_074*.tif -o test_32nc.h5
 
 full: $(Target)
 	$(Target) -i /data/RodentToolsData/Ex_488_Em_525_stitched/082870*.tif -o /data2/Rodent/Ex_488_Em_525_stitched_32nc.h5
