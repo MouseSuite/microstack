@@ -39,6 +39,10 @@ jobs:
     - name: make
       run: InstallDir=microstack26a_linux_x86_64 make -j install
 
+        
+    - name: make docker
+      run: make -j docker
+
     - name: Save Package Folder as Artifact
       uses: actions/upload-artifact@v4
       with:
