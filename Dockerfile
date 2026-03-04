@@ -10,4 +10,4 @@ COPY bin/x86_64-pc-linux-gnu/microstack26a_x86_64-pc-linux-gnu /opt/bin
 
 RUN cd /opt/bin && ln -s microstack26a_x86_64-pc-linux-gnu microstack
 
-CMD ["/opt/bin/microstack"]
+ENTRYPOINT ["/opt/bin/microstack"]
