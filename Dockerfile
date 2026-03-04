@@ -1,7 +1,7 @@
 FROM debian:stable-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libtiff-dev libhdf5-dev wget \
+    libtiff-dev libhdf5-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /opt/bin/
