@@ -77,7 +77,7 @@ clean:
 
 docker: $(Target)
 	@printf '\033[0;35m'"Building microstack container"'\033[0m'"\n"
-	docker build -t ghcr.io/$(Repository)/microstack .
+	docker build -t ghcr.io/$(Repository) .
 
 apptainer: docker
 	@printf '\033[0;35m'"Building microstack apptainer"'\033[0m'"\n"
