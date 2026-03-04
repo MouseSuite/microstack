@@ -28,7 +28,9 @@ public:
   {
     TIFF *tif = TIFFOpen(ifname.c_str(), "r");
     if (!tif) return false;
-    return get(tif);
+    bool flag=get(tif);
+    TIFFClose(tif);
+    return flag;
   }
 };
 

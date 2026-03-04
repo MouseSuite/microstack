@@ -69,3 +69,11 @@ deltarget:
 
 clean:
 	rm -f $(ObjFiles)
+
+docker: $(Target)
+	@printf '\033[0;35m'"Building microstack"'\033[0m'"\n"
+	docker build -t microstack .
+
+apptainer: docker
+	docker save microstack:latest -o microstack.tar
+	sudo apptainer build microstack.sif docker-archive:microstack.tar
