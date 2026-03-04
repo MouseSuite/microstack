@@ -10,6 +10,11 @@ MACHTYPE:=$(shell set | grep ^MACHTYPE= | sed s-.*=--)
 endif
 BinDir ?= ${BaseDir}bin/$(MACHTYPE)
 ObjDir ?= $(BaseDir)obj/$(MACHTYPE)/$(Name)/
+Repository := $(GitHubRepository)
+ifeq ($(GitHubRepository),)
+	Repository := dshattuck
+endif
+
 GITHEAD=$(shell git rev-parse --short HEAD)
 
 Name    := $(shell basename `pwd`)
@@ -72,9 +77,9 @@ clean:
 
 docker: $(Target)
 	@printf '\033[0;35m'"Building microstack container"'\033[0m'"\n"
-	docker build -t microstack .
+	docker build -t ghcr.io/$(Repository)/microstack .
 
 apptainer: docker
 	@printf '\033[0;35m'"Building microstack apptainer"'\033[0m'"\n"
-	docker save microstack:latest -o microstack.tar
+	docker save ghcr.io/$(Repository)/microstack:latest -o microstack.tar
 	sudo apptainer build microstack.sif docker-archive:microstack.tar

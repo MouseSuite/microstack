@@ -30,6 +30,7 @@ jobs:
         echo "ZipFile=microstack-26a-x86_64.zip" >> $GITHUB_ENV      
         echo "SHA_SHORT=$(git rev-parse --short "$GITHUB_SHA")" >> "$GITHUB_ENV"
         echo "BUILDDATE=$(date +'%Y-%m-%dT%H%M%S')" >> $GITHUB_ENV
+        echo "GitHubRepository=${{ github.repository }}" >> $GITHUB_ENV
     
     - name: install hdf5 and libtiff
       run: |
@@ -38,10 +39,10 @@ jobs:
         
     - name: make
       run: InstallDir=microstack26a_linux_x86_64 make -j install
-
         
     - name: make docker
-      run: make -j docker
+      run: |
+        make -j docker
 
     - name: Save Package Folder as Artifact
       uses: actions/upload-artifact@v4
