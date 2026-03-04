@@ -40,6 +40,24 @@ InstallDir=microstack26a_linux_x86_64 make -j install
 ```
 will build the files and copy them to `microstack26a_linux_x86_64`.
 
+### Building Docker and Singularity Images
+
+The makefile includes functionality for building a Docker image. It can also build an Apptainer .sif from the Docker image.
+
+The following assume you have `docker` and `apptainer` installed on your system.
+
+#### Docker
+This will build microstack (if necessary) and then build a minimal Docker container named microstack, which uses a slim version of debian and includes the libraries `libtiff-dev` and `libhdf5-dev`. The approximate size is `187MB`.
+```
+make docker
+```
+
+#### Apptainer
+This will invoke the Docker build process and then run apptainer to create `microstack.sif`. The approximate size of the `sif` is `60MB`.
+```
+make apptainer
+```
+
 ## Author
 MicroStack is developed by [David Shattuck](http://shattuck.bmap.ucla.edu) at UCLA.
 
