@@ -51,10 +51,10 @@ int main(int argc, char *argv[])
   ap.description="tiff to hdf5 stacker for 16-bit single-channel microscopy data";
   ap.bindVector("i",ifnames,"TIFF filenames",true);
   ap.bind("o",ofname,"output_hdf5","output hdf5 file",true);
+  ap.bindFlag("b",buffered,"buffer writes (faster, uses more memory)");
   ap.bind("n",imageName,"image_name","image path in hdf5 file");
   ap.bind("c",chunksize,"chunk_size","size of chunks ");
   ap.bind("z",compression,"compression_level","level for gzip (0=none; 9=maximum)");
-  ap.bindFlag("b",buffered,"buffer writes (faster, uses more memory)");
   if (!ap.parseAndValidate(argc,argv))
   {
     return ap.usage();
