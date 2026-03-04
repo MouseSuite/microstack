@@ -71,9 +71,10 @@ clean:
 	rm -f $(ObjFiles)
 
 docker: $(Target)
-	@printf '\033[0;35m'"Building microstack"'\033[0m'"\n"
+	@printf '\033[0;35m'"Building microstack container"'\033[0m'"\n"
 	docker build -t microstack .
 
 apptainer: docker
+	@printf '\033[0;35m'"Building microstack apptainer"'\033[0m'"\n"
 	docker save microstack:latest -o microstack.tar
 	sudo apptainer build microstack.sif docker-archive:microstack.tar
