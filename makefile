@@ -12,7 +12,7 @@ BinDir ?= ${BaseDir}bin/$(MACHTYPE)
 ObjDir ?= $(BaseDir)obj/$(MACHTYPE)/$(Name)/
 Repository := $(GitHubRepository)
 ifeq ($(GitHubRepository),)
-	Repository := dshattuck
+	Repository := dshattuck/microstack
 endif
 
 GITHEAD=$(shell git rev-parse --short HEAD)
@@ -81,8 +81,8 @@ docker: $(Target)
 
 apptainer: docker
 	@printf '\033[0;35m'"Building microstack apptainer"'\033[0m'"\n"
-	docker save ghcr.io/$(Repository)/microstack:latest -o microstack.tar
+	docker save ghcr.io/$(Repository):latest -o microstack.tar
 	sudo apptainer build microstack.sif docker-archive:microstack.tar
 
 push: docker
-	docker push ghcr.io/$(Repository)/microstack:latest
+	docker push ghcr.io/$(Repository):latest
