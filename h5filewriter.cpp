@@ -73,6 +73,35 @@ bool H5FileWriter::writeSlice(Image2D &image2D, const hsize_t z)
   return true;
 }
 
+bool H5FileWriter::setStepsizes(float rx, const float ry, const float rz)
+{
+  try
+  {
+    dimVar.name="pixdim";
+    dimVar.dims = {3};
+    std::vector<float> res {rz, rx, ry};
+    std::cout<<"creating "<<dimVar.name<<std::endl;
+    std::cout<<"[ "; for (auto &v : res) std::cout<<' '<<v; std::cout<<" ]"<<std::endl;
+    dimVar.dataspace = H5::DataSpace (dimVar.dims.size(),&dimVar.dims[0]);  
+    dimVar.dataset=H5::DataSet(file.createDataSet(dimVar.name.c_str(),H5::PredType::NATIVE_FLOAT, dimVar.dataspace));
+    std::cout<<"created "<<dimVar.name<<std::endl;
+
+    std::cout<<"storing "<<dimVar.name<<std::endl;
+    std::vector<hsize_t> memdims = { 3 };
+    std::vector<hsize_t> offsets = { 0 };
+    H5::DataSpace memspace = H5::DataSpace (memdims.size(),&memdims[0]);
+    H5::DataSpace hdataspace = dimVar.dataset.getSpace();
+    hdataspace.selectHyperslab(H5S_SELECT_SET, &memdims[0], &offsets[0]);
+    dimVar.dataset.write(res.data(), H5::PredType::NATIVE_FLOAT, memspace, hdataspace);
+  }
+  catch( H5::Exception error )
+  {
+    error.printErrorStack();
+    return false;
+  }
+  return true;
+}
+
 bool H5FileWriter::writeSlab(Image3D &image3D, const hsize_t startingZ, const hsize_t nplanes)
 {
   std::vector<hsize_t> memdims = { nplanes, imageDims[1], imageDims[2] };

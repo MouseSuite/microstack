@@ -26,9 +26,11 @@ public:
   bool createImageVar(const std::string &varname, hsize_t chunkSize, int compression);
   bool writeSlice(Image2D &image2D, const hsize_t z);
   bool writeSlab(Image3D &image3D, const hsize_t startingZ, const hsize_t nPlanes);
+  bool setStepsizes(const float rx=1.0f, const float ry=1.0f, const float rz=1.0f);
   std::vector<hsize_t> imageDims;
   H5::H5File file;
   ImageVar imageVar;
+  ImageVar dimVar;
 };
 
 #endif
