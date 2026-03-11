@@ -6,3 +6,4 @@ log*
 *.sif
 *.tar
 *.h5
+*.log
