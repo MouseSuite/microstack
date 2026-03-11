@@ -28,6 +28,7 @@ public:
   bool writeSlab(Image3D &image3D, const hsize_t startingZ, const hsize_t nPlanes);
   bool setStepsizes(const float rx=1.0f, const float ry=1.0f, const float rz=1.0f);
   std::vector<hsize_t> imageDims;
+  std::vector<float> pixdims{1,1,1};
   H5::H5File file;
   ImageVar imageVar;
   ImageVar dimVar;

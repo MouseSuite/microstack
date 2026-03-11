@@ -79,20 +79,17 @@ bool H5FileWriter::setStepsizes(float rx, const float ry, const float rz)
   {
     dimVar.name="pixdim";
     dimVar.dims = {3};
-    std::vector<float> res {rz, rx, ry};
+    pixdims={rz, ry, rx};
     std::cout<<"creating "<<dimVar.name<<std::endl;
-    std::cout<<"[ "; for (auto &v : res) std::cout<<' '<<v; std::cout<<" ]"<<std::endl;
+    std::cout<<"[ "; for (auto &v : pixdims) std::cout<<' '<<v; std::cout<<" ]"<<std::endl;
     dimVar.dataspace = H5::DataSpace (dimVar.dims.size(),&dimVar.dims[0]);  
     dimVar.dataset=H5::DataSet(file.createDataSet(dimVar.name.c_str(),H5::PredType::NATIVE_FLOAT, dimVar.dataspace));
-    std::cout<<"created "<<dimVar.name<<std::endl;
-
-    std::cout<<"storing "<<dimVar.name<<std::endl;
     std::vector<hsize_t> memdims = { 3 };
     std::vector<hsize_t> offsets = { 0 };
     H5::DataSpace memspace = H5::DataSpace (memdims.size(),&memdims[0]);
     H5::DataSpace hdataspace = dimVar.dataset.getSpace();
     hdataspace.selectHyperslab(H5S_SELECT_SET, &memdims[0], &offsets[0]);
-    dimVar.dataset.write(res.data(), H5::PredType::NATIVE_FLOAT, memspace, hdataspace);
+    dimVar.dataset.write(pixdims.data(), H5::PredType::NATIVE_FLOAT, memspace, hdataspace);
   }
   catch( H5::Exception error )
   {
