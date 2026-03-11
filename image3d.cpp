@@ -9,10 +9,10 @@
 
 void Image3D::initialize(const uint32_t w, const uint32_t h, const uint32_t n)
 {
-  width = w;
-  height = h;
-  nSlices = n;
-  data.resize(width*height*nSlices);
+  nx = w;
+  ny = h;
+  nz = n;
+  data.resize(nx*ny*nz);
 }
 
 bool Image3D::readTiff(const std::string &ifname, uint32_t z)
@@ -34,10 +34,10 @@ bool Image3D::readTiff(const std::string &ifname, uint32_t z)
     TIFFClose(tif);
     return false;
   }
-  uint32_t slicesize=width*height;
-  for (uint32_t row=0;row<height;row++)
+  uint32_t slicesize=nx*ny;
+  for (uint32_t row=0;row<ny;row++)
   {
-    if (TIFFReadScanline(tif,data.data()+z*slicesize+row*width,row,0)==-1)
+    if (TIFFReadScanline(tif,data.data()+z*slicesize+row*nx,row,0)==-1)
     {
       std::cerr<<"error reading scanline "<<row<<" in file "<<ifname<<std::endl;
       break;
